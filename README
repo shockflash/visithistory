@@ -1,0 +1,62 @@
+django-visithistory
+--------------
+
+Tracks the visited pages (via there primary objects! Only usage if this is true).
+
+Example:
+
+A user visites a page where a Country is shown, then give the VisitHistory object
+the Country instance to log. Later, you will get it in return when you acces
+the list.
+The user is a must-have parameter. 
+
+The system use get_absolute_url() to find the url. To save a basic text/name for
+a class it is saved via unicode().
+
+Installation
+------------
+
+Place it in your INSTALLED_PAPS directory:
+
+INSTALLED_APPS = (
+    ....,
+    'visithistory',
+)
+
+Thats all.
+
+USAGE
+-----
+
+Add new entries:
+================
+
+vhistory = VisitHistory(user)
+
+myInstance = TestModel(...)
+vhistory.add(myInstance)
+...
+
+
+Get last (max) entries:
+=======================
+
+list = vhistory.get()
+
+Important: list is not a basic list of the objects, but a list of VisitHistoryEntry
+
+Attributes:
+- url
+- text
+- object
+- additional_data
+
+Get last 5 entries:
+=======================
+
+list = vhistory.get(5)
+
+Get last 5 entries for class TestClass:
+=======================
+
+list = vhistory.get(5, object_class = TestClass)
